@@ -4,9 +4,11 @@ dataset/
 # 环境变量
 .env
 
-
+.idea
 # 日志
 process.log
 
 # Python 缓存
 __pycache__
+
+.DS_Store
