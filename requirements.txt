@@ -185,3 +185,4 @@ wrapt==2.0.1
 xmljson==0.2.1
 xxhash==3.6.0
 zstandard==0.25.0
+pymysql

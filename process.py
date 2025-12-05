@@ -9,6 +9,12 @@ from llm.google import invoke_llm
 from prompt.prompt import build_prompt
 from typing import Optional
 import time
+import pymysql
+from dotenv import load_dotenv
+load_dotenv()
+env_path = Path(__file__).parent / '.env'
+if env_path.exists():
+    load_dotenv(env_path)
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     filename='process.log',
@@ -16,6 +22,7 @@ logging.basicConfig(
     level=logging.DEBUG
 )
 logger.setLevel(logging.DEBUG)
+
 
 
 async def generate_processed_data(huchenfeng) -> Optional[tuple[str, str]]:
@@ -32,7 +39,15 @@ async def generate_processed_data(huchenfeng) -> Optional[tuple[str, str]]:
 
 async def process_train_dialogues():
     """批量处理训练数据：读取 train_dialogues，调用 LLM，更新数据库"""
-    conn_local = sqlite3.connect("dataset/database/raw_dialogues.db")
+    conn_local = sqlite3.connect("dataset/database/raw_dialogues.db") 
+    # conn_local = pymysql.connect(
+    #     host=os.getenv("MYSQL_HOST"),
+    #     user=os.getenv("MYSQL_USER"),
+    #     password=os.getenv("MYSQL_PASSWORD"),
+    #     database="raw_dialogues",
+    #     charset="utf8mb4",
+    #     cursorclass=pymysql.cursors.DictCursor
+    # )  
     try:
         conn_read = conn_local.cursor()
         conn_write = conn_local.cursor()
@@ -40,7 +55,7 @@ async def process_train_dialogues():
         conn_read.execute("SELECT id, huchenfeng, status FROM train_dialogues")
         rows_count = 0
         
-        while True and rows_count < 100:
+        while True and rows_count < 10000:
             # 计时开始
             start_time = time.time()
             rows = conn_read.fetchmany(50)

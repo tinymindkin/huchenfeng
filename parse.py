@@ -1,17 +1,23 @@
 from llm_output_parser import parse_json
 import json
 from typing import Optional
-
+import logging
+logger = logging.getLogger(__name__)
 
 def is_valid_list(data:list) -> bool:
-    return type(data) == list and data[0] != ''
+    return type(data) == list and len(data) > 0 and data[0] != ''
 
 def is_valid_dict(data:dict) -> bool:
     return isinstance(data, dict) and len(data) == 1
 
 
 def parse(text) -> Optional[list]:
-    data = parse_json(text)
+    try:
+        data = parse_json(text)
+    except ValueError:
+        print("解析 JSON 失败: " ,text)
+        logger.error("解析 JSON 失败: %s", text)
+        return None
     if is_valid_list(data):
 
         return json.dumps(data)
@@ -20,7 +26,9 @@ def parse(text) -> Optional[list]:
         if is_valid_list(first_value):
             return json.dumps(first_value)
         else:
-            print(data) 
+            print("解析 JSON 失败: " ,text)
+            logger.error("解析 JSON 失败: %s", text) 
+            return None
     else:
         return None
 if __name__ == "__main__":
@@ -47,4 +55,4 @@ if __name__ == "__main__":
     }
     ```
     """
-    print(parse(llm_response))
+    print(parse(llm_response_2))
