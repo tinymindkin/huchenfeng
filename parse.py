@@ -11,26 +11,29 @@ def is_valid_dict(data:dict) -> bool:
     return isinstance(data, dict) and len(data) == 1
 
 
-def parse(text) -> Optional[list]:
+def parse(text) -> Optional[list[str]]:
     try:
         data = parse_json(text)
     except ValueError:
+        logger.warning("解析 JSON 失败: %s", text)
         print("解析 JSON 失败: " ,text)
-        logger.error("解析 JSON 失败: %s", text)
         return None
     if is_valid_list(data):
 
-        return json.dumps(data)
+        return [str(item) for item in data]
     elif is_valid_dict(data):
         first_value = next(iter(data.values()))
         if is_valid_list(first_value):
-            return json.dumps(first_value)
+            return [str(item) for item in first_value]
         else:
+            logger.warning("解析 JSON 失败: %s", text)
             print("解析 JSON 失败: " ,text)
-            logger.error("解析 JSON 失败: %s", text) 
             return None
     else:
+        logger.warning("解析 JSON 失败: %s", text)
+        print("解析 JSON 失败: " ,text)
         return None
+
 if __name__ == "__main__":
         # Parse JSON from an LLM response
     llm_response = """
@@ -55,4 +58,5 @@ if __name__ == "__main__":
     }
     ```
     """
-    print(parse(llm_response_2))
+    print("llm_response_2:", parse(llm_response_2))
+    print("llm_response_1:", parse(llm_response_1))

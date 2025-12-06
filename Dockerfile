@@ -25,5 +25,5 @@ COPY . .
 # 需要在运行时通过环境变量提供 GOOGLE_API_KEY
 ENV GOOGLE_API_KEY=""
 
-# 默认执行批处理脚本；如需其他入口，可在 docker run 时覆盖 CMD
-CMD ["python", "process.py"]
+# 默认执行生成脚本；如需其他入口，可在 docker run 时覆盖 CMD
+CMD ["python", "generate_answer.py"]

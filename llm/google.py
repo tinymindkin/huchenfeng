@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 client = genai.Client(api_key = os.getenv("GOOGLE_API_KEY"))
 
-async def invoke_llm(text, model="gemini-2.5-flash",try_count=10):
+async def invoke_llm(text, model="gemini-2.5-flash-lite",try_count=10):
     try:
         count = 0
         response = None

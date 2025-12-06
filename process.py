@@ -19,9 +19,9 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(
     filename='process.log',
     format='%(asctime)s - %(filename)s-%(funcName)s-%(message)s',
-    level=logging.DEBUG
+    level=logging.INFO
 )
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 
@@ -64,6 +64,7 @@ async def process_train_dialogues():
             
             valid_rows = [row for row in rows if row[2] == 0]
             print(f"处理的有效id是:{[row[0] for row in valid_rows]}")
+            logger.info(f"处理的有效id是:{[row[0] for row in valid_rows]}")
             if not valid_rows:
                 continue
             

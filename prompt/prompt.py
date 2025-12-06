@@ -9,12 +9,12 @@ def build_prompt(text: str) -> str:
     prompt = PromptTemplate.from_template(template_str)
     return prompt.format(text=text)
 
-def build_custom_prompt(text: str,prompt_file : str = "generate_question.md" ) -> str:
+def build_custom_prompt(answer,prompt_file : str = "generate_question.md" ) -> str:
     """Render the prompt template with the given text."""
 
     template_str = Path(__file__).with_name(prompt_file).read_text(encoding="utf-8")
     prompt = PromptTemplate.from_template(template_str)
-    return prompt.format(text=text)
+    return prompt.format(answer=answer)
 
 
 if __name__ == "__main__":
