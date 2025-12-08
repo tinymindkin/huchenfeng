@@ -1,7 +1,6 @@
-<div style="text-align: center;">
+<p align="center">
 <img src="public/2.jpg" alt="我的照片" width="300" height="200"> 
-</div>  
-
+</p> 
 # 🔞 户晨风大模型
 > 80k+户晨风对话文本数据集 + 基于 Qwen2.5-7B 的语言风格微调模型
 
