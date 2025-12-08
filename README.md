@@ -6,7 +6,7 @@
 > 80k+户晨风对话文本数据集 + 基于 Qwen2.5-7B 的语言风格微调模型
 
 [🤗 模型下载](https://huggingface.co/alkintin/huchenfeng-model)
-
+[🤗 数据集下载](https://huggingface.co/datasets/alkintin/huchenfeng-dataset)
 ---
 ## 快速开始
 - 克隆项目

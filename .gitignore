@@ -1,5 +1,6 @@
 # 数据库
 dataset/
+question_answer.jsonl
 
 # 环境变量
 .env

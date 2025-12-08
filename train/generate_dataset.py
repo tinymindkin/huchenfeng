@@ -6,7 +6,7 @@ import os
 # 获取脚本所在目录的父目录（项目根目录）
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASE_PATH = os.path.join(ROOT_DIR, "dataset/database/raw_dialogues.db")
-SFT_PATH = os.path.join(ROOT_DIR, "train/sft.jsonl")
+SFT_PATH = os.path.join(ROOT_DIR, "question_answer.jsonl")
 
 
 
@@ -23,7 +23,7 @@ def generate_dataset():
     try:
         cursor.execute('''
             SELECT id, question, answer FROM question_answer_table
-            WHERE LENGTH(question) > 2 AND LENGTH(answer) > 200 AND status = 1
+            WHERE LENGTH(question) > 2 AND status = 1
         ''')
         
         count = 0
