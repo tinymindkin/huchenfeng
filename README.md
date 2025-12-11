@@ -23,7 +23,7 @@ hf download alkintin/huchenfeng-model --local-dir huchenfeng-model
 conda create -n huchenfeng
 conda init
 conda activate huchenfeng
-pip install requirements.txt # torch 版本需根据本机cuda版本自行选择 https://download.pytorch.org/whl/torch_stable.html
+pip install -r requirements.txt # torch 版本需根据本机cuda版本自行选择 https://download.pytorch.org/whl/torch_stable.html
 ```
 - 执行推理
 ```bash
